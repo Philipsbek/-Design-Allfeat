@@ -1,0 +1,179 @@
+---
+const cols = [
+  {
+    title: 'Solution',
+    links: ['Time Stamp (ATS)', 'Catalogs (MIDDS)', 'Infrastructure', 'Library'],
+  },
+  {
+    title: 'Ecosystem',
+    links: ['For artists', 'For labels', 'For CMOs', 'Developers'],
+  },
+  {
+    title: 'Resources',
+    links: ['Blog', 'Documentation', 'Whitepaper', 'Brand kit'],
+  },
+];
+---
+
+<footer class="footer" id="start">
+  <div class="teal-wash footer__wash"></div>
+  <div class="container footer__cta reveal">
+    <span class="eyebrow">Get started</span>
+    <h2 class="display">Ready to secure your music IP?</h2>
+    <div class="footer__actions">
+      <a href="#start" class="btn btn--primary">Get started</a>
+      <a href="#blog" class="btn btn--ghost">Read the blog</a>
+    </div>
+  </div>
+
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M16 3 L29 27 L3 27 Z" stroke="#fffbeb" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M16 12 L22 24 L10 24 Z" fill="#fffbeb"/>
+        </svg>
+        <span>Allfeat</span>
+      </a>
+      <p class="footer__tagline">
+        The open-source foundation connecting all music data — governed by music
+        stakeholders.
+      </p>
+    </div>
+
+    {
+      cols.map((col) => (
+        <div class="footer__col">
+          <h4 class="footer__col-title">{col.title}</h4>
+          <ul>
+            {col.links.map((l) => (
+              <li><a href="#" class="footer__link">{l}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© 2026 Allfeat Foundation — a design study. Not affiliated with allfeat.org.</p>
+    <div class="footer__social">
+      <a href="#" aria-label="X">X</a>
+      <a href="#" aria-label="Substack">Substack</a>
+      <a href="#" aria-label="GitHub">GitHub</a>
+      <a href="#" aria-label="Discord">Discord</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    overflow: hidden;
+    padding-top: var(--section-gap);
+    border-top: 1px solid var(--color-card-edge);
+    margin-top: 40px;
+  }
+  .footer__wash {
+    background: radial-gradient(
+      50% 80% at 50% 0%,
+      rgba(0, 177, 140, 0.14) 0%,
+      transparent 65%
+    );
+  }
+
+  .footer__cta {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 72px;
+  }
+  .footer__cta .display {
+    margin-top: 14px;
+  }
+  .footer__actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 48px;
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .footer__tagline {
+    color: var(--color-mute-cream);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 34ch;
+  }
+
+  .footer__col-title {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-ash-gray);
+    margin-bottom: 14px;
+  }
+  .footer__col li {
+    margin-bottom: 10px;
+  }
+  .footer__link {
+    font-size: 15px;
+    color: var(--color-warm-cream);
+    transition: color 0.18s ease;
+  }
+  .footer__link:hover {
+    color: var(--color-signal-teal);
+  }
+
+  .footer__bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px;
+    border-top: 1px solid var(--color-card-edge);
+    color: var(--color-mute-cream);
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .footer__social {
+    display: flex;
+    gap: 18px;
+  }
+  .footer__social a:hover {
+    color: var(--color-signal-teal);
+  }
+
+  @media (max-width: 820px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

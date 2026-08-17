@@ -1,0 +1,96 @@
+---
+const rowA = ['Airplay Tracking', 'Licensing', 'NFT', 'Ticketing', 'Masterclass', 'AI', 'Music Library'];
+const rowB = ['XR Experience', 'Collaborations', 'Music Consolidation', 'Crowdfunding', 'VIP Access', 'Merchandising', 'Royalties'];
+const rowC = ['Copyright Control', 'Streaming', 'Content Monetization', 'Fan Engagement', 'Marketplace', 'Gaming'];
+
+const rows = [
+  { items: rowA, dir: 'left' },
+  { items: rowB, dir: 'right' },
+  { items: rowC, dir: 'left' },
+];
+---
+
+<section class="marquee section" id="usecases">
+  <div class="container marquee__head reveal">
+    <span class="eyebrow">Built on top</span>
+    <h2 class="heading-lg">One infrastructure, endless use cases.</h2>
+  </div>
+
+  <div class="marquee__rows">
+    {
+      rows.map((row) => (
+        <div class={`marquee__track marquee__track--${row.dir}`}>
+          <div class="marquee__set">
+            {[...row.items, ...row.items].map((item) => (
+              <span class="marquee__chip badge">{item}</span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .marquee {
+    overflow: hidden;
+  }
+
+  .marquee__head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .marquee__head .heading-lg {
+    margin-top: 14px;
+  }
+
+  .marquee__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+  }
+
+  .marquee__set {
+    display: flex;
+    gap: 16px;
+    padding-right: 16px;
+  }
+
+  .marquee__track--left .marquee__set {
+    animation: scroll-left 38s linear infinite;
+  }
+  .marquee__track--right {
+    justify-content: flex-end;
+  }
+  .marquee__track--right .marquee__set {
+    animation: scroll-right 44s linear infinite;
+  }
+
+  .marquee__chip {
+    font-size: 15px;
+    padding: 10px 20px;
+    color: var(--color-warm-cream);
+    white-space: nowrap;
+    background: rgba(255, 251, 235, 0.02);
+  }
+
+  .marquee__track:hover .marquee__set {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+</style>

@@ -1,0 +1,263 @@
+---
+// Original isometric illustrations rendered as inline SVG strings.
+function art(kind: string): string {
+  if (kind === 'rings') {
+    return `<svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="rbg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2a0d12"/><stop offset="1" stop-color="#120608"/>
+        </linearGradient>
+      </defs>
+      <rect width="600" height="380" fill="url(#rbg)"/>
+      <g fill="none" stroke="#ff4a5f">
+        ${Array.from({ length: 11 }).map((_, i) => `<circle cx="470" cy="70" r="${30 + i * 34}" stroke-width="${8 - i * 0.5}" opacity="${0.9 - i * 0.07}"/>`).join('')}
+      </g>
+      <g fill="#ff4a5f" opacity="0.9">
+        <circle cx="150" cy="300" r="5"/><circle cx="220" cy="330" r="4"/>
+        <circle cx="90" cy="250" r="3"/><circle cx="300" cy="340" r="3"/>
+      </g>
+    </svg>`;
+  }
+  if (kind === 'database') {
+    // isometric coral database cylinders on a grid
+    const cyl = (x: number, y: number, s = 1) => {
+      const w = 34 * s, h = 12 * s, bh = 30 * s;
+      return `<g transform="translate(${x} ${y})">
+        <path d="M${-w} 0 a${w} ${h} 0 0 0 ${2 * w} 0 v${bh} a${w} ${h} 0 0 1 ${-2 * w} 0 z" fill="#c8102e"/>
+        <ellipse cx="0" cy="${bh}" rx="${w}" ry="${h}" fill="#8f0a20"/>
+        <ellipse cx="0" cy="0" rx="${w}" ry="${h}" fill="#ff5c70"/>
+        <ellipse cx="0" cy="0" rx="${w * 0.6}" ry="${h * 0.6}" fill="none" stroke="#8f0a20" stroke-width="1"/>
+      </g>`;
+    };
+    let grid = '';
+    const pts = [[170,120],[300,90],[430,120],[235,180],[365,180],[300,240],[170,240],[430,240]];
+    for (const [x, y] of pts) grid += cyl(x, y);
+    return `<svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="dbg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ff3355"/><stop offset="1" stop-color="#4a0512"/></linearGradient></defs>
+      <rect width="600" height="380" fill="url(#dbg)"/>
+      <g stroke="#ffb3bd" stroke-width="1" opacity="0.35">
+        <path d="M60 200 L300 120 L540 200" fill="none"/>
+        <path d="M60 260 L300 180 L540 260" fill="none"/>
+        <path d="M120 150 L120 300 M300 100 L300 340 M480 150 L480 300" fill="none"/>
+      </g>
+      ${grid}
+    </svg>`;
+  }
+  if (kind === 'spotlight') {
+    // spotlight beam over crowd of silhouettes
+    let crowd = '';
+    for (let r = 0; r < 4; r++) {
+      for (let c = 0; c < 8; c++) {
+        const x = 300 + c * 40 - (r % 2) * 20;
+        const y = 150 + r * 55;
+        crowd += `<g transform="translate(${x} ${y})" fill="#e9e6d3" opacity="${0.5 + r * 0.14}">
+          <circle cx="0" cy="0" r="12"/><path d="M-16 40 a16 20 0 0 1 32 0 z" fill="#c05a63"/>
+        </g>`;
+      }
+    }
+    return `<svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="sbg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0c3a30"/><stop offset="1" stop-color="#07201a"/></linearGradient></defs>
+      <rect width="600" height="380" fill="url(#sbg)"/>
+      <path d="M170 40 L120 360 L260 360 L200 40 Z" fill="#fffbeb" opacity="0.14"/>
+      <ellipse cx="150" cy="40" rx="26" ry="14" fill="#fffbeb" opacity="0.9"/>
+      <g transform="translate(150 120)" fill="#ff4a5f">
+        <circle cx="0" cy="0" r="15"/><path d="M-20 52 a20 26 0 0 1 40 0 z"/>
+      </g>
+      ${crowd}
+    </svg>`;
+  }
+  // conveyor belt of tiles
+  let tiles = '';
+  for (let i = 0; i < 5; i++) {
+    const x = 120 + i * 95;
+    const y = 150 + i * 26;
+    tiles += `<g transform="translate(${x} ${y})">
+      <path d="M0 0 l60 -34 l60 34 l-60 34 z" fill="#ff5c70"/>
+      <path d="M0 0 l60 34 l0 26 l-60 -34 z" fill="#b30f28"/>
+      <path d="M120 0 l-60 34 l0 26 l60 -34 z" fill="#e01640"/>
+    </g>`;
+  }
+  const gearArt = `<svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="cbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c4a3b"/><stop offset="1" stop-color="#3a0510"/></linearGradient></defs>
+    <rect width="600" height="380" fill="url(#cbg)"/>
+    <path d="M60 140 L520 380 L520 340 L60 100 Z" fill="#0a2f26" opacity="0.7"/>
+    ${tiles}
+    <g fill="none" stroke="#1fd6b0" stroke-width="2" opacity="0.6">
+      <circle cx="90" cy="300" r="16"/><circle cx="150" cy="330" r="16"/>
+    </g>
+  </svg>`;
+  return gearArt;
+}
+
+const stats = [
+  {
+    value: '6 IDs',
+    label: 'for 1 artist',
+    copy: 'ISRC, ISWC, IPI, IPN, ISNI and UPC — each one can lose your royalties, and none of them live on the same platform together.',
+    art: 'rings',
+  },
+  {
+    value: '253M',
+    label: 'masters',
+    copy: 'Streaming platforms now host 253 million tracks. Web2 databases barely interoperate, and Web3 is quietly duplicating the same fragmentation.',
+    art: 'database',
+  },
+  {
+    value: '88%',
+    label: 'under 1k plays',
+    copy: '88% of these tracks generate fewer than 1,000 plays per year, and most come from independent distributors (96.2% of uploads).',
+    art: 'spotlight',
+  },
+  {
+    value: '106,000',
+    label: 'tracks per day',
+    copy: 'New tracks uploaded to streaming platforms every single day — steadily slowing down discoverability for everyone.',
+    art: 'conveyor',
+  },
+];
+---
+
+<section class="why" id="why">
+  <div class="why__bg"></div>
+  <div class="why__rings" aria-hidden="true">
+    <svg viewBox="0 0 400 400" width="520" height="520">
+      {Array.from({ length: 9 }).map((_, i) => (
+        <circle cx="200" cy="200" r={22 + i * 20} fill="none" stroke="#1c6f5c" stroke-width="1" opacity={0.5 - i * 0.03} />
+      ))}
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="why__head reveal">
+      <span class="eyebrow eyebrow--coral">Why?</span>
+      <h2 class="display why__title">
+        Helping recover <span class="teal">$2.5Bn+</span>
+        <span class="muted">in undistributed royalties every year.</span>
+      </h2>
+      <p class="body-muted why__sub">
+        Fragmented databases and broken metadata leave creators without the
+        financial tools and development opportunities they deserve. The Allfeat
+        foundation exists to solve exactly that.
+      </p>
+    </div>
+
+    <div class="why__stack">
+      {
+        stats.map((s, i) => (
+          <article
+            class="why__row card"
+            style={`top: calc(120px + ${i * 22}px); z-index: ${i + 1};`}
+          >
+            <div class="why__text">
+              <div class="why__value">{s.value}</div>
+              <div class="why__label">{s.label}</div>
+              <p class="why__copy">{s.copy}</p>
+            </div>
+            <div class="why__art" data-art={s.art}>
+              <Fragment set:html={art(s.art)} />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    position: relative;
+    padding-block: var(--section-gap);
+    overflow: clip;
+  }
+  .why__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(60% 40% at 85% 8%, rgba(255, 74, 95, 0.16) 0%, transparent 60%),
+      radial-gradient(50% 50% at 15% 4%, rgba(255, 74, 95, 0.08) 0%, transparent 60%);
+  }
+  .why__rings {
+    position: absolute;
+    right: -140px;
+    bottom: -140px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .why__head {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+  .why__title { margin-top: 16px; }
+  .why__title .teal { color: var(--color-signal-teal); }
+  .why__sub { margin-top: 20px; max-width: 600px; margin-inline: auto; }
+
+  .why__stack {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .why__row {
+    position: sticky;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 32px;
+    align-items: center;
+    padding: 40px;
+    background: #171717;
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .why__text { display: flex; flex-direction: column; }
+  .why__value {
+    font-size: clamp(40px, 6vw, 56px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    color: var(--color-warm-cream);
+  }
+  .why__label {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-signal-teal);
+    margin: 6px 0 18px;
+  }
+  .why__copy {
+    color: var(--color-mute-cream);
+    font-size: 17px;
+    line-height: 1.5;
+    max-width: 42ch;
+  }
+
+  .why__art {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    box-shadow: var(--shadow-subtle);
+  }
+  .why__art :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .why__row {
+      grid-template-columns: 1fr;
+      padding: 24px;
+      gap: 22px;
+    }
+    .why__art { order: -1; }
+  }
+</style>
+

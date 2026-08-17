@@ -1,0 +1,174 @@
+---
+const rows = [
+  {
+    key: 'Infrastructure',
+    solution:
+      'A blockchain self-financed by its transaction fees, with strong decentralization, a DAO, and a solid validation framework.',
+    income:
+      'Planned pre-sales of 100 million tokens at €0.02 in H2 2025 and €0.05 in H1 2026.',
+  },
+  {
+    key: 'Data',
+    solution:
+      'An encryption-backed data layer that deploys real interoperability across Web3 music, supported by four tools (ATS, MIDDS, DIF, ODIT).',
+    income:
+      'Allfeat features commercialized as white labels to editors, publishers, CMOs and music entrepreneurs, integrated with Allfeat labs.',
+  },
+  {
+    key: 'Dashboard',
+    solution:
+      'An application layer to read every level of on-chain data — artists, managers, CMOs and beyond.',
+    income:
+      'A freemium analytics model: basic access is free, advanced features run €100/yr for artists and €600/yr for managers.',
+  },
+  {
+    key: 'Library',
+    solution:
+      'A solid open-source library that lets communities build directly on the core or deploy tools into their own ecosystem.',
+    income:
+      'Usage-based transaction fees — less than €4 to secure 1,000 entries.',
+  },
+];
+---
+
+<section class="stair section" id="stairway">
+  <div class="container">
+    <div class="stair__head reveal">
+      <span class="eyebrow">The Model</span>
+      <h2 class="display">Stairway to Allfeat</h2>
+      <p class="body-muted stair__sub">
+        Allfeat proposes to become the source of truth for the music industry —
+        a scientific approach to music IP, built one solid step at a time.
+      </p>
+    </div>
+
+    <div class="stair__tabs reveal" role="tablist">
+      <button class="stair__tab is-active" data-tab="solution" role="tab">
+        Innovative data solution
+      </button>
+      <button class="stair__tab" data-tab="income" role="tab">Income model</button>
+    </div>
+
+    <div class="stair__grid">
+      {
+        rows.map((r, i) => (
+          <article class="card stair__card reveal" style={`transition-delay:${i * 60}ms`}>
+            <div class="stair__key">
+              <span class="stair__step">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="heading-sm">{r.key}</h3>
+            </div>
+            <p class="stair__copy" data-content="solution">{r.solution}</p>
+            <p class="stair__copy is-hidden" data-content="income">{r.income}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stair__head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 36px;
+  }
+  .stair__head .display {
+    margin-top: 14px;
+  }
+  .stair__sub {
+    margin-top: 18px;
+  }
+
+  .stair__tabs {
+    display: inline-flex;
+    gap: 4px;
+    padding: 6px;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-subtle);
+    margin: 0 auto 40px;
+    just-self: center;
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
+  }
+
+  .stair__tab {
+    border-radius: var(--radius-full);
+    padding: 9px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-mute-cream);
+    transition: all 0.2s ease;
+  }
+
+  .stair__tab.is-active {
+    background: var(--color-signal-teal);
+    color: var(--color-warm-cream);
+    box-shadow: var(--shadow-subtle-2);
+  }
+
+  .stair__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .stair__card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 220px;
+  }
+
+  .stair__key {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .stair__step {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-ember-coral);
+    letter-spacing: 0.02em;
+  }
+
+  .stair__copy {
+    color: var(--color-mute-cream);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .stair__copy.is-hidden {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    .stair__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .stair__grid {
+      grid-template-columns: 1fr;
+    }
+    .stair__card {
+      min-height: 0;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.stair__tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      document
+        .querySelectorAll('.stair__tab')
+        .forEach((t) => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      document.querySelectorAll<HTMLElement>('.stair__copy').forEach((c) => {
+        c.classList.toggle('is-hidden', c.dataset.content !== target);
+      });
+    });
+  });
+</script>

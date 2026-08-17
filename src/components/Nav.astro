@@ -1,0 +1,124 @@
+---
+---
+
+<header class="nav">
+  <a href="/" class="nav__brand" aria-label="Allfeat home">
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 3 L29 27 L3 27 Z" stroke="#fffbeb" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M16 12 L22 24 L10 24 Z" fill="#fffbeb"/>
+    </svg>
+    <span>Allfeat</span>
+  </a>
+
+  <nav class="nav__capsule" aria-label="Primary">
+    <a href="#solution" class="nav__link">Solution</a>
+    <span class="nav__divider"></span>
+    <a href="#why" class="nav__link">Why</a>
+    <span class="nav__divider"></span>
+    <a href="#blog" class="nav__link">Blog</a>
+    <span class="nav__divider"></span>
+    <a href="#buy" class="nav__link">Buy token</a>
+    <a href="#start" class="btn btn--primary nav__cta">Get started</a>
+  </nav>
+
+  <button class="nav__burger" aria-label="Menu" id="navBurger">
+    <span></span><span></span>
+  </button>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px clamp(18px, 4vw, 40px);
+    pointer-events: none;
+  }
+
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-warm-cream);
+    pointer-events: auto;
+  }
+
+  .nav__capsule {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(21, 21, 21, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    padding: 7px 7px 7px 18px;
+    pointer-events: auto;
+    transition: background 0.35s var(--ease-quart), border-color 0.35s var(--ease-quart);
+  }
+
+  :global(.nav--scrolled) .nav__capsule {
+    background: rgba(21, 21, 21, 0.82);
+    border-color: var(--color-card-edge);
+  }
+
+  .nav__link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-warm-cream);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    transition: color 0.18s ease;
+  }
+
+  .nav__link:hover {
+    color: var(--color-signal-teal);
+  }
+
+  .nav__divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 251, 235, 0.14);
+  }
+
+  .nav__cta {
+    margin-left: 8px;
+    padding: 9px 18px;
+    font-size: 14px;
+  }
+
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    pointer-events: auto;
+    padding: 12px;
+    background: rgba(21, 21, 21, 0.72);
+    border: 1px solid var(--color-card-edge);
+    border-radius: var(--radius-full);
+  }
+
+  .nav__burger span {
+    width: 20px;
+    height: 2px;
+    background: var(--color-warm-cream);
+    display: block;
+  }
+
+  @media (max-width: 820px) {
+    .nav__capsule {
+      display: none;
+    }
+    .nav__burger {
+      display: flex;
+    }
+  }
+</style>

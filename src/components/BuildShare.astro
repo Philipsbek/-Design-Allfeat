@@ -1,0 +1,83 @@
+---
+---
+
+<section class="build section" id="build">
+  <div class="teal-wash build__wash"></div>
+  <div class="container build__grid">
+    <article class="card build__card reveal">
+      <h2 class="heading-lg">Build your idea.</h2>
+      <p class="build__copy">
+        Artists, developers and industry players: register, certify and build
+        directly on Allfeat.
+      </p>
+      <div class="build__tags">
+        <span class="badge">Self protection</span>
+        <span class="badge">Discoverability</span>
+      </div>
+      <a href="#start" class="btn btn--primary build__btn">Start plugging</a>
+    </article>
+
+    <article class="card build__card build__card--coral card--coral-edge reveal">
+      <h2 class="heading-lg">Share your idea.</h2>
+      <p class="build__copy">
+        Plug your project into music’s first universal infrastructure and reach
+        the whole ecosystem.
+      </p>
+      <div class="build__tags">
+        <span class="badge">Open source</span>
+        <span class="badge">Interoperable</span>
+      </div>
+      <a href="#start" class="btn btn--ghost build__btn">Find your Feat</a>
+    </article>
+  </div>
+</section>
+
+<style>
+  .build {
+    position: relative;
+    overflow: hidden;
+  }
+  .build__wash {
+    background: radial-gradient(
+      55% 70% at 50% 100%,
+      rgba(255, 74, 95, 0.10) 0%,
+      transparent 70%
+    );
+  }
+  .build__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .build__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 40px;
+  }
+  .build__copy {
+    color: var(--color-mute-cream);
+    font-size: var(--text-body-lg);
+    line-height: 1.45;
+    max-width: 42ch;
+  }
+  .build__tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .build__btn {
+    margin-top: 6px;
+  }
+  @media (max-width: 820px) {
+    .build__grid {
+      grid-template-columns: 1fr;
+    }
+    .build__card {
+      padding: 28px;
+    }
+  }
+</style>

@@ -1,0 +1,213 @@
+---
+// Music-industry identifiers placed on concentric orbits
+const ring1 = ['ISRC', 'ISWC', 'IPI', 'UPC'];
+const ring2 = ['IPN', 'ISNI', 'EAN', 'ISMN', 'ISAN', 'ISTC'];
+---
+
+<section class="orbit section" id="community">
+  <div class="teal-wash orbit__wash"></div>
+
+  <div class="orbit__stage" aria-hidden="true">
+    <div class="orbit__ring orbit__ring--1">
+      {ring1.map((id, i) => (
+        <span class="orbit__node" style={`--i:${i}; --n:${ring1.length};`}>{id}</span>
+      ))}
+    </div>
+    <div class="orbit__ring orbit__ring--2">
+      {ring2.map((id, i) => (
+        <span class="orbit__node orbit__node--sm" style={`--i:${i}; --n:${ring2.length};`}>{id}</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="container orbit__center reveal">
+    <svg class="orbit__logo" width="60" height="60" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 3 L29 27 L3 27 Z" stroke="#fffbeb" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M16 11 L23 25 L9 25 Z" fill="#fffbeb"/>
+    </svg>
+    <h2 class="display orbit__title">Music, better with you.</h2>
+    <a href="#start" class="btn btn--primary orbit__cta">Discover how</a>
+
+    <div class="orbit__stats">
+      <div class="orbit__stat">
+        <span class="orbit__stat-val">400+</span>
+        <span class="orbit__stat-label">Artists</span>
+      </div>
+      <span class="orbit__stat-div"></span>
+      <div class="orbit__stat">
+        <span class="orbit__stat-val">9</span>
+        <span class="orbit__stat-label">Labels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .orbit {
+    position: relative;
+    overflow: hidden;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+  }
+
+  .orbit__wash {
+    background: radial-gradient(
+      45% 55% at 50% 45%,
+      rgba(0, 177, 140, 0.32) 0%,
+      rgba(0, 177, 140, 0.08) 45%,
+      transparent 72%
+    );
+  }
+
+  .orbit__stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+  }
+
+  .orbit__ring {
+    position: absolute;
+    border: 1px solid rgba(56, 56, 53, 0.7);
+    border-radius: 50%;
+  }
+
+  .orbit__ring--1 {
+    width: 420px;
+    height: 420px;
+    animation: spin 120s linear infinite;
+  }
+
+  .orbit__ring--2 {
+    width: 660px;
+    height: 660px;
+    animation: spin 130s linear infinite reverse;
+  }
+
+  .orbit__node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 68px;
+    height: 68px;
+    margin: -34px 0 0 -34px;
+    border-radius: 50%;
+    background: var(--color-charcoal-stage);
+    box-shadow: var(--shadow-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-mute-cream);
+    /* position each node around the circle */
+    transform: rotate(calc(360deg / var(--n) * var(--i)))
+      translateY(calc(-210px))
+      rotate(calc(-360deg / var(--n) * var(--i)));
+    animation: spin-rev 120s linear infinite;
+  }
+
+  .orbit__ring--2 .orbit__node {
+    transform: rotate(calc(360deg / var(--n) * var(--i)))
+      translateY(-330px)
+      rotate(calc(-360deg / var(--n) * var(--i)));
+    animation: spin 130s linear infinite;
+  }
+
+  .orbit__node--sm {
+    width: 58px;
+    height: 58px;
+    margin: -29px 0 0 -29px;
+    font-size: 12px;
+    color: var(--color-ash-gray);
+  }
+
+  .orbit__center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .orbit__title {
+    max-width: 12ch;
+  }
+
+  .orbit__cta {
+    margin-top: 4px;
+  }
+
+  .orbit__stats {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-subtle);
+    background: rgba(21, 21, 21, 0.6);
+    backdrop-filter: blur(8px);
+  }
+
+  .orbit__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .orbit__stat-val {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-signal-teal);
+  }
+  .orbit__stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-mute-cream);
+  }
+  .orbit__stat-div {
+    width: 1px;
+    height: 34px;
+    background: var(--color-card-edge);
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spin-rev {
+    to { transform: rotate(-360deg); }
+  }
+
+  @media (max-width: 820px) {
+    .orbit__ring--1 { width: 300px; height: 300px; }
+    .orbit__ring--2 { width: 460px; height: 460px; }
+    .orbit__node {
+      width: 52px; height: 52px; margin: -26px 0 0 -26px; font-size: 11px;
+      transform: rotate(calc(360deg / var(--n) * var(--i)))
+        translateY(-150px)
+        rotate(calc(-360deg / var(--n) * var(--i)));
+    }
+    .orbit__ring--2 .orbit__node {
+      transform: rotate(calc(360deg / var(--n) * var(--i)))
+        translateY(-230px)
+        rotate(calc(-360deg / var(--n) * var(--i)));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .orbit__stage { opacity: 0.35; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit__ring, .orbit__node { animation: none !important; }
+  }
+</style>
